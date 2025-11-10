@@ -5,12 +5,14 @@ import com.app.todo.services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller //marks a class as a spring mvc controller, making it capable of handling incoming web requests and returning a response
-@RequestMapping("/tasks") //used to map web requests (like URLs) to specific handler classes or methods
+//@RequestMapping("/tasks") //used to map web requests (like URLs) to specific handler classes or methods
 public class TaskController {
     private final TaskService taskService;
 
@@ -23,5 +25,11 @@ public class TaskController {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
         return "tasks";
+    }
+
+    @PostMapping //used to map incoming HTTP GET requests to specific handler methods in a controller
+    public String createTasks(@RequestParam String title) {
+        taskService.createTask(title);
+        return "redirect:/";
     }
 }
