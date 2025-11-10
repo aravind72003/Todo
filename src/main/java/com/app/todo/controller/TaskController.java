@@ -4,10 +4,7 @@ import com.app.todo.models.Task;
 import com.app.todo.services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +27,18 @@ public class TaskController {
     @PostMapping //used to map incoming HTTP GET requests to specific handler methods in a controller
     public String createTasks(@RequestParam String title) {
         taskService.createTask(title);
+        return "redirect:/";
+    }
+
+    @GetMapping("/{id}/delete") //used to map incoming HTTP GET requests to specific handler methods in a controller
+    public String deleteTask(@PathVariable Long id) {
+    taskService.deleteTask(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/{id}/toggle") //used to map incoming HTTP GET requests to specific handler methods in a controller
+    public String toggleTask(@PathVariable Long id) {
+        taskService.toggleTask(id);
         return "redirect:/";
     }
 }
