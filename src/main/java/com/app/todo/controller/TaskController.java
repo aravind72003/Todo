@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/tasks")
+@Controller //marks a class as a spring mvc controller, making it capable of handling incoming web requests and returning a response
+@RequestMapping("/tasks") //used to map web requests (like URLs) to specific handler classes or methods
 public class TaskController {
     private final TaskService taskService;
 
@@ -18,7 +18,7 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping
+    @GetMapping //used to map incoming HTTP GET requests to specific handler methods in a controller
     public String getTasks(Model model) {
         List<Task> tasks = taskService.getAllTasks();
         model.addAttribute("tasks", tasks);
